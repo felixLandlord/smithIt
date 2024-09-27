@@ -16,4 +16,6 @@ structure:
     - templates:
         - index.html
     - static:
-        - css: {}
+        - css:
+            - style.css
+            - main.css
