@@ -1,0 +1,13 @@
+# pip>=23.1
+# setuptools>=67.0
+# wheel
+# --install-option="--use-pep517" grpcio
+
+# 1. python3 -m venv .venv                
+# 2. source .venv/bin/activate
+# 3. pip install -r requirements.txt
+
+pyyaml
+
+# TO INSTALL THE PACKAGE LOCALLY FROM THIS DIRECTORY
+# pip install .
