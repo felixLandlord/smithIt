@@ -1,0 +1,64 @@
+project_name: MyProject
+structure:
+  src:
+    - __init__.py: |
+        # This is the __init__.py file
+    - main.py: |
+        def main():
+            print("Hello, world!")
+
+        if __name__ == "__main__":
+            main()
+    - utils.py: |
+        def add(a, b):
+            return a + b
+  tests:
+    - __init__.py: |
+        # This is the __init__.py file for tests
+    - test_main.py: |
+        import unittest
+
+        class TestMain(unittest.TestCase):
+            def test_example(self):
+                self.assertTrue(True)
+
+        if __name__ == "__main__":
+            unittest.main()
+  docs:
+    - README.md: |
+        # MyProject
+
+        This is the README file for MyProject.
+  core:
+    - app.py: |
+        from flask import Flask
+
+        app = Flask(__name__)
+
+        @app.route('/')
+        def home():
+            return "Hello, world!"
+
+        if __name__ == "__main__":
+            app.run(debug=True)
+    - models.py: |
+        # This is the models.py file
+    - routes.py: |
+        # This is the routes.py file
+    - templates:
+        - index.html: |
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>MyProject</title>
+            </head>
+            <body>
+                <h1>Welcome to MyProject</h1>
+            </body>
+            </html>
+    - static:
+        - css:
+            - style.css: |
+                body {
+                    font-family: Arial, sans-serif;
+                }

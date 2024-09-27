@@ -32,7 +32,7 @@ def create_project(config_file):
             else:
                 print(f"Creating file: {path}")  # Debug print
                 with open(path, 'w') as f:
-                    f.write('')
+                    f.write(value)
 
     create_structure(project_name, structure)
     print(f"Project '{project_name}' created successfully.")
