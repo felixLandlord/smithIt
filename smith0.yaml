@@ -14,8 +14,7 @@ structure:
     - models.py
     - routes.py
     - templates:
-        - index.html
+      - index.html
     - static:
-        - css:
-            - style.css
-            - main.css
+      - css:
+        - style.css

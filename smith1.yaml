@@ -14,16 +14,16 @@ structure:
     - models.py
     - routes.py
     - templates:
-        - index.html: |
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <title>MyProject</title>
-            </head>
-            <body>
-                <h1>Welcome to MyProject</h1>
-            </body>
-            </html>
+      - index.html: |
+          <!DOCTYPE html>
+          <html>
+          <head>
+              <title>MyProject</title>
+          </head>
+          <body>
+              <h1>Welcome to MyProject</h1>
+          </body>
+          </html>
     - static:
-        - css:
-            - style.css
+      - css:
+        - style.css
