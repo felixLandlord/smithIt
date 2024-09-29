@@ -16,5 +16,4 @@ structure:
   - smithit-0.1.0.tar.gz
 - tests:
   - __init__.py
-- new:
-  - smithIt: []
+  - empty: []

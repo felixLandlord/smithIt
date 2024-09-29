@@ -8,6 +8,7 @@ from rich.console import Console
 app = typer.Typer()
 console = Console()
 
+
 def create_structure(base_path, structure, verbose=False, force=False):
     for item in structure:
         if isinstance(item, dict):
@@ -41,6 +42,7 @@ def create_structure(base_path, structure, verbose=False, force=False):
                     f.write('')
             else:
                 typer.echo(f"\nFile already exists: {path}")
+
 
 def create_project(config_file: str, output_dir: str = "", verbose: bool = False, force: bool = False, parent: bool = False):
     if not config_file:
@@ -78,6 +80,7 @@ def create_project(config_file: str, output_dir: str = "", verbose: bool = False
 
     typer.echo(f"\nProject '{project_name}' created successfully.")
 
+
 def detect_structure(base_path):
     structure = []
     for root, dirs, files in os.walk(base_path):
@@ -109,6 +112,7 @@ def detect_structure(base_path):
 
     return structure
 
+
 def convert_structure(structure):
     converted = []
     for item in structure:
@@ -118,6 +122,7 @@ def convert_structure(structure):
             converted.append(item)
     return converted
 
+# CLI COMMANDS
 @app.command()
 def create(config_file: str = typer.Argument(None, help="Config file"),
            output_dir: str = typer.Option("", "--output", "-o", help="Output directory"),
@@ -125,6 +130,7 @@ def create(config_file: str = typer.Argument(None, help="Config file"),
            force: bool = typer.Option(False, "--force", "-f", help="Force overwrite existing project"),
            parent: bool = typer.Option(False, "--parent", "-p", help="Create the parent folder")):
     create_project(config_file, output_dir, verbose, force, parent)
+
 
 @app.command()
 def delete(paths: list[str]):
@@ -147,7 +153,8 @@ def delete(paths: list[str]):
                 typer.echo(f"\nPath does not exist: {path}")
             progress.update(task, advance=1)
         progress.stop()
-        typer.echo("Deletion complete")
+        typer.echo("\nDeletion complete")
+
 
 @app.command()
 def rename(src: str, dest: str):
@@ -164,7 +171,8 @@ def rename(src: str, dest: str):
             typer.echo(f"\nSource path does not exist: {src}")
         progress.update(task, advance=1)
         progress.stop()
-        typer.echo("Rename complete")
+        typer.echo("\nRename complete")
+
 
 @app.command()
 def move(paths: list[str], dest: str):
@@ -183,7 +191,8 @@ def move(paths: list[str], dest: str):
                 typer.echo(f"\nPath does not exist: {path}")
             progress.update(task, advance=1)
         progress.stop()
-        typer.echo("Move complete")
+        typer.echo("\nMove complete")
+
 
 @app.command()
 def add(paths: list[str]):
@@ -208,7 +217,8 @@ def add(paths: list[str]):
                 typer.echo(f"\nPath already exists: {path}")
             progress.update(task, advance=1)
         progress.stop()
-        typer.echo("Addition complete")
+        typer.echo("\nAddition complete")
+
 
 @app.command()
 def sync(config_file: str = typer.Option("", "--config", "-c", help="Config file to write the structure to"),
@@ -217,8 +227,16 @@ def sync(config_file: str = typer.Option("", "--config", "-c", help="Config file
         config_file = 'smith.yaml'
 
     project_name = os.path.basename(os.path.abspath(project_dir))
-    structure = detect_structure(project_dir)
-    converted_structure = convert_structure(structure)
+    
+    with Progress(
+        SpinnerColumn(),
+        TextColumn("[progress.description]{task.description}"),
+        transient=True,
+    ) as progress:
+        task = progress.add_task(description="Syncing structure...", total=1)
+        structure = detect_structure(project_dir)
+        converted_structure = convert_structure(structure)
+        progress.update(task, advance=1)
 
     config = {
         'project_name': project_name,
@@ -231,8 +249,29 @@ def sync(config_file: str = typer.Option("", "--config", "-c", help="Config file
     typer.echo(f"\nStructure synced with '{config_file}' successfully.")
 
 @app.command()
+def view(path: str):
+    if os.path.isdir(path):
+        if not os.listdir(path):
+            typer.echo(f"\nThe directory '{path}' has no files.")
+        else:
+            typer.echo(f"\nContents of directory '{path}':")
+            for root, dirs, files in os.walk(path):
+                level = root.replace(path, '').count(os.sep)
+                indent = ' ' * 4 * (level)
+                typer.echo(f"\n * {indent}{os.path.basename(root)}/")
+                subindent = ' ' * 4 * (level + 1)
+                for file in files:
+                    typer.echo(f" - {subindent}{file}")
+    elif os.path.isfile(path):
+        typer.echo(f"\nThe file '{path}' exists.")
+    else:
+        typer.echo(f"\nThe path '{path}' does not exist.")
+
+
+@app.command()
 def version():
-    typer.echo("smithIt version 0.1")
+    typer.echo("\nsmithIt version 0.1")
+
 
 if __name__ == "__main__":
     app()

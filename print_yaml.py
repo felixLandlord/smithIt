@@ -2,7 +2,7 @@ import yaml
 from pprint import pprint
 
 # Define the path to the YAML file
-yaml_file = 'smith0.yaml'
+yaml_file = 'smith.yaml'
 
 # Open and read the YAML file
 with open(yaml_file, 'r') as file:
