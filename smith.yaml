@@ -1,4 +1,4 @@
-project_name: smithIt
+project_name: MyProject
 structure:
 - print_yaml.py
 - LICENSE

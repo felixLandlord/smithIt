@@ -1,20 +1,29 @@
-project_name: MyProject
+project_name: FelixProject
 structure:
-  src:
-    - __init__.py
-    - main.py
-    - utils.py
-  tests:
-    - __init__.py
-    - test_main.py
-  docs:
-    - README.md
-  core:
-    - app.py
-    - models.py
-    - routes.py
-    - templates:
-      - index.html
-    - static:
-      - css:
-        - style.css
+- print_yaml.py
+- LICENSE
+- pyproject.toml
+- README.md
+- smith1.yaml
+- smith.yaml
+- smith0.yaml
+- poetry.lock
+- core:
+  - __init__.py
+  - creator.py
+- dist:
+  - smithit-0.1.0-py3-none-any.whl
+  - smithit-0.1.0.tar.gz
+- tests:
+  - __init__.py
+  - etornam: []
+  - felix: |
+      <!DOCTYPE html>
+      <html>
+      <head>
+          <title>MyProject</title>
+      </head>
+      <body>
+          <h1>Welcome to MyProject</h1>
+      </body>
+      </html>

@@ -129,11 +129,21 @@ def create(config_file: str = typer.Argument(None, help="Config file"),
            verbose: bool = typer.Option(False, "--verbose", "-v", help="Verbose mode"),
            force: bool = typer.Option(False, "--force", "-f", help="Force overwrite existing project"),
            parent: bool = typer.Option(False, "--parent", "-p", help="Create the parent folder")):
+    """
+    Create a new project based on the configuration file.
+
+    This command reads the configuration file and creates the project structure in the specified output directory.
+    """
     create_project(config_file, output_dir, verbose, force, parent)
 
 
 @app.command()
 def delete(paths: list[str]):
+    """
+    Delete specified paths.
+
+    This command deletes the specified files or directories.
+    """
     with Progress(
         SpinnerColumn(),
         TextColumn("[progress.description]{task.description}"),
@@ -158,6 +168,11 @@ def delete(paths: list[str]):
 
 @app.command()
 def rename(src: str, dest: str):
+    """
+    Rename a file or directory.
+
+    This command renames the specified source path to the destination path.
+    """
     with Progress(
         SpinnerColumn(),
         TextColumn("[progress.description]{task.description}"),
@@ -176,6 +191,11 @@ def rename(src: str, dest: str):
 
 @app.command()
 def move(paths: list[str], dest: str):
+    """
+    Move files or directories to a specified destination.
+
+    This command moves the specified paths to the destination directory.
+    """
     with Progress(
         SpinnerColumn(),
         TextColumn("[progress.description]{task.description}"),
@@ -196,6 +216,11 @@ def move(paths: list[str], dest: str):
 
 @app.command()
 def add(paths: list[str]):
+    """
+    Add new files or directories.
+
+    This command creates the specified files or directories if they do not already exist.
+    """
     with Progress(
         SpinnerColumn(),
         TextColumn("[progress.description]{task.description}"),
@@ -223,6 +248,11 @@ def add(paths: list[str]):
 @app.command()
 def sync(config_file: str = typer.Option("", "--config", "-c", help="Config file to write the structure to"),
          project_dir: str = typer.Option(".", "--dir", "-d", help="Project directory to detect structure from")):
+    """
+    Sync the project structure with a configuration file.
+
+    This command detects the structure of the project directory and writes it to the specified configuration file.
+    """
     if not config_file:
         config_file = 'smith.yaml'
 
@@ -250,6 +280,11 @@ def sync(config_file: str = typer.Option("", "--config", "-c", help="Config file
 
 @app.command()
 def view(path: str):
+    """
+    View the contents of a directory or check if a file exists.
+
+    This command lists the contents of the specified directory or checks if the specified file exists.
+    """
     if os.path.isdir(path):
         if not os.listdir(path):
             typer.echo(f"\nThe directory '{path}' has no files.")
@@ -270,6 +305,11 @@ def view(path: str):
 
 @app.command()
 def version():
+    """
+    Display the version of smithIt.
+
+    This command displays the version of the smithIt tool.
+    """
     typer.echo("\nsmithIt version 0.1")
 
 
