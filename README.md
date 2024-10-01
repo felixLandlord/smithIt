@@ -5,17 +5,20 @@
 smithIt is a versatile command-line tool designed to manage project structures efficiently. 
 This documentation provides a comprehensive guide to using smithIt, covering all available commands and their usage.
 
+
 ## Installation
 
 To use smithIt, you need to have Python installed on your system. You can install smithIt using pip:
 
 ```bash
-pip install smithIt
+pip install smithit
 ```
+
 
 ## Usage
 
 smithIt provides several commands to manage your project structure. Here is a detailed overview of each command:
+
 
 ### create
 
@@ -34,7 +37,7 @@ smith create [CONFIG_FILE] [OPTIONS]
 - `--force, -f`: Force overwrite existing project.
 - `--parent, -p`: Create the parent folder.
 
-**Example:**
+**Examples:**
 
 ```bash
 smith create
@@ -67,14 +70,59 @@ smith create my_config.yaml --force --parent
 This will create a new project based on the specified configuration file `my_config.yaml` in the parent directory, overwriting any existing project.
 
 ```bash
+smith create my_config.yaml --force --verbose
+```
+This will create a new project based on the specified configuration file `my_config.yaml` in the current directory, overwriting any existing project and providing verbose output.
+
+```bash
+smith create my_config.yaml --parent --verbose
+```
+This will create a new project based on the specified configuration file `my_config.yaml` in the parent directory and providing verbose output.
+
+```bash
+smith create my_config.yaml --parent --verbose --force
+```
+This will create a new project based on the specified configuration file `my_config.yaml` in the parent directory, overwriting any existing project and providing verbose output.
+
+```bash
 smith create my_config.yaml --output my_project 
 ```
 This will create a new project based on the specified configuration file `my_config.yaml` in the `my_project` directory.
 
 ```bash
+smith create my_config.yaml --output my_project --parent
+```
+This will create a new project based on the specified configuration file `my_config.yaml` in the `my_project` directory in the parent directory.
+
+```bash
+smith create my_config.yaml --output my_project --force
+```
+This will create a new project based on the specified configuration file `my_config.yaml` in the `my_project` directory, overwriting any existing project.
+
+```bash
+smith create my_config.yaml --output my_project --verbose
+```
+This will create a new project based on the specified configuration file `my_config.yaml` in the `my_project` directory, providing verbose output.
+
+```bash
 smith create my_config.yaml --output my_project --force --parent
 ```
 This will create a new project based on the specified configuration file `my_config.yaml` in the `my_project` directory in the parent directory, overwriting any existing project.
+
+```bash
+smith create my_config.yaml --output my_project --force --verbose
+```
+This will create a new project based on the specified configuration file `my_config.yaml` in the `my_project` directory, overwriting any existing project and providing verbose output.
+
+```bash
+smith create my_config.yaml --output my_project --verbose --parent
+```
+This will create a new project based on the specified configuration file `my_config.yaml` in the `my_project` directory in the parent directory and providing verbose output.
+
+```bash
+smith create my_config.yaml --output my_project --force --parent --verbose
+```
+This will create a new project based on the specified configuration file `my_config.yaml` in the `my_project` directory in the parent directory, overwriting any existing project and providing verbose output.
 
 
 ### delete
@@ -88,7 +136,7 @@ smith delete [PATHS]...
 **Arguments:**
 - `PATHS`: List of paths to delete.
 
-**Example:**
+**Examples:**
 ```bash
 smith delete path/to/file
 ```
@@ -146,7 +194,7 @@ smith move [PATHS]... [DEST]
 - `PATHS`: List of paths to move.
 - `DEST`: Destination directory.
 
-**Example:**
+**Examples:**
 ```bash
 smith move file1.txt /path/to/destination
 ```
@@ -163,6 +211,11 @@ smith move file1.txt file2.txt /path/to/destination
 This will move the files `file1.txt` and `file2.txt` to the directory `/path/to/destination`
 
 ```bash
+smith move folder1 folder2 /path/to/destination
+```
+This will move the directories `folder1` and `folder2` to the directory `/path/to/destination`
+
+```bash
 smith move file1.txt folder /path/to/destination
 ```
 This will move the file `file1.txt` and the directory `folder` to the directory `/path/to/destination`
@@ -173,66 +226,101 @@ This will move the file `file1.txt` and the directory `folder` to the directory 
 Adds new files or directories.
 
 ```bash
-smithIt add [PATHS]...
+smith add [PATHS]...
 ```
 
 **Arguments:**
 - `PATHS`: List of paths to add.
 
-**Example:**
+**Examples:**
 ```bash
-smithIt add new_file.txt new_directory/
+smith add new_file.txt
 ```
+This will create the file `new_file.txt`
+
+```bash
+smith add new_directory
+```
+This will create the directory `new_directory`
+
+```bash
+smith add new_file1.txt new_file2.txt
+```
+This will create the files `new_file1.txt` and `new_file2.txt`
+
+```bash
+smith add new_directory1 new_directory2
+```
+This will create the directories `new_directory1` and `new_directory2`
+
+```bash
+smith add new_file.txt new_directory
+```
+This will create the file `new_file.txt` and the directory `new_directory`
+
 
 ### sync
 
 Syncs the project structure with a configuration file.
 
 ```bash
-smithIt sync [OPTIONS]
+smith sync [OPTIONS]
 ```
 
 **Options:**
 - `--config, -c`: Config file to write the structure to (default: smith.yaml).
 - `--dir, -d`: Project directory to detect structure from (default: current directory).
 
-**Example:**
+**Examples:**
 ```bash
-smithIt sync --config my_config.yaml --dir /path/to/project
+smith sync --config my_config.yaml
 ```
+This will write the current project structure to the configuration file `my_config.yaml`
+
+```bash
+smith sync --config my_config.yaml --dir /path/to/project
+```
+This will sync the project structure at `/path/to/project` with the configuration file `my_config.yaml`
+
 
 ### view
 
 Views the contents of a directory or checks if a file exists.
 
 ```bash
-smithIt view [PATH]
+smith view [PATH]
 ```
 
 **Arguments:**
 - `PATH`: Path to view.
 
-**Example:**
+**Examples:**
 ```bash
-smithIt view /path/to/directory
+smith view /path/to/file
 ```
+This will check if the file `/path/to/file` exists
+
+```bash
+smith view /path/to/directory
+```
+This will display the contents of the directory `/path/to/directory`
+
 
 ### version
 
 Displays the version of smithIt.
 
 ```bash
-smithIt version
+smith version
 ```
 
-**Example:**
-```bash
-smithIt version
-```
 
 ## Configuration File
 
 The configuration file is a YAML file that defines the project structure. Here is an example of a configuration file:
+
+
+### with no templates
 
 ```yaml
 project_name: MyProject
@@ -244,73 +332,54 @@ structure:
       - test_main.py
       - test_utils.py
   - README.md
+  - nested_folder:
+    - folder:
+      - empty.txt
+    - file.txt
+  - empty: []
 ```
+This configuration file defines a project with the following structure:
+- `src` folder containing `main.py` and `utils.py`
+- `tests` folder containing `test_main.py` and `test_utils.py`
+- `README.md` file
+- `nested_folder` containing a `folder` with an `empty.txt` file and a `file.txt` file
+- `empty` folder with no contents
 
-## Examples
 
-### Creating a New Project
+### with templates (boilerplate codes)
 
-To create a new project based on a configuration file:
-
-```bash
-smithIt create my_config.yaml --output my_project --verbose --force --parent
+```yaml
+project_name: MyProject
+structure:
+  - src:
+      - main.py
+      - utils.py
+  - tests:
+      - test_main.py
+      - test_utils.py
+  - README.md
+  - nested_folder:
+    - folder:
+      - empty.txt
+    - file.txt
+  - temp: |
+      <!DOCTYPE html>
+      <html>
+      <head>
+          <title>MyProject</title>
+      </head>
+      <body>
+          <h1>Welcome to MyProject</h1>
+      </body>
+      </html>
 ```
+This configuration file defines a project with the following structure:
+- `src` folder containing `main.py` and `utils.py`
+- `tests` folder containing `test_main.py` and `test_utils.py`
+- `README.md` file
+- `nested_folder` containing a `folder` with an `empty.txt` file and a `file.txt` file
+- `temp` file containing an HTML template
 
-### Deleting Files and Directories
-
-To delete specific files and directories:
-
-```bash
-smithIt delete path/to/file path/to/directory
-```
-
-### Renaming a File or Directory
-
-To rename a file or directory:
-
-```bash
-smithIt rename old_name.txt new_name.txt
-```
-
-### Moving Files or Directories
-
-To move files or directories to a specified destination:
-
-```bash
-smithIt move file1.txt file2.txt /path/to/destination
-```
-
-### Adding New Files or Directories
-
-To add new files or directories:
-
-```bash
-smithIt add new_file.txt new_directory/
-```
-
-### Syncing Project Structure
-
-To sync the project structure with a configuration file:
-
-```bash
-smithIt sync --config my_config.yaml --dir /path/to/project
-```
-
-### Viewing Directory Contents
-
-To view the contents of a directory or check if a file exists:
-
-```bash
-smithIt view /path/to/directory
-```
-
-### Displaying Version
-
-To display the version of smithIt:
-
-```bash
-smithIt version
-```
 
 ## Conclusion
 
